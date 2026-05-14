@@ -36,7 +36,6 @@ body {
     color: var(--font-colour);
     font-size: var(--font-size);
     line-height: var(--line-height);
-    margin-bottom: 60px;
 }
 
 
@@ -206,8 +205,4 @@ footer {
     padding: 1rem;
     color: white;
     font-size: var(--font-size-sm);
-    margin-top: 3rem;
-    position: fixed;
-    bottom: 0%;
-    width: 100vw;
 }
