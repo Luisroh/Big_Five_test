@@ -1,0 +1,156 @@
+.results-hero {
+    text-align: center;
+    max-width: 700px;
+}
+
+.results-hero-label {
+    color: var(--font-secondary-colour);
+    font-size: 0.9rem;
+}
+
+.results-hero-description {
+    color: var(--font-secondary-colour);
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+}
+
+.profile-label {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-colour), #9B6DFF);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: var(--font-bold);
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    margin: 1rem 0;
+    letter-spacing: 1px;
+}
+
+
+.dimensions-section {
+    width: 90%;
+    max-width: 900px;
+    background: var(--background2-colour);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.dimension-row {
+    background: white;
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.dimension-row:last-child {
+    margin-bottom: 0;
+}
+
+.dimension-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dimension-name {
+    font-weight: var(--font-bold);
+    font-size: 1rem;
+    color: var(--font-colour);
+}
+
+.dimension-score-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.dimension-score {
+    font-size: 1.3rem;
+    font-weight: var(--font-bold);
+    color: var(--primary-colour);
+}
+
+.level-badge {
+    font-size: 0.7rem;
+    font-weight: var(--font-bold);
+    padding: 0.25rem 0.8rem;
+    border-radius: 40px;
+    color: white;
+}
+
+.level-very-low  { background: #e74c3c; }
+.level-low       { background: #e67e22; }
+.level-medium    { background: var(--highlight-colour); }
+.level-high      { background: #27ae60; }
+.level-very-high { background: var(--primary-colour); }
+
+.progress-bar-bg {
+    background: var(--background2-colour);
+    border-radius: 40px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 40px;
+    background: linear-gradient(90deg, var(--primary-colour), #9B6DFF);
+    transition: width 1s ease;
+    width: 0%;
+}
+
+.interpretation-section {
+    width: 90%;
+    max-width: 900px;
+    background: var(--background2-colour);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.interp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+.interp-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.interp-card h4 {
+    color: var(--primary-colour);
+    margin-bottom: 0.6rem;
+    font-size: 0.95rem;
+}
+
+.interp-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.interp-card ul li {
+    font-size: 0.85rem;
+    color: var(--font-secondary-colour);
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--background2-colour);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.interp-card ul li:last-child {
+    border-bottom: none;
+}
+
+.cta-final a {
+    color: white;
+    text-decoration: none;
+}

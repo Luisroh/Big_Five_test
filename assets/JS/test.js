@@ -13,6 +13,8 @@ const batches = [
     "batches/batch_7.html"
 ]
 
+let allAnswers = {}
+
 function loadBatch(index) {
     if (index >= 0 && index < batches.length) {
         iframe.src = batches[index]
@@ -34,11 +36,24 @@ function loadBatch(index) {
     }
 }
 
+function collectAnswers() {
+    try {
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document
+        const radios = iframeDoc.querySelectorAll('input[type="radio"]:checked')
+        radios.forEach(radio => {
+            allAnswers[radio.name] = radio.value
+        })
+    } catch (e) {
+        console.warn('Could not collect answers from iframe:', e)
+    }
+}
+
 nextBtn.addEventListener('click', function () {
     if (currentIndex + 1 < batches.length) {
         currentIndex++;
         loadBatch(currentIndex);
     } else {
+        /*
         if (currentIndex === batches.length - 1) {
             nextBtn.textContent = '🎉 Test completado 🎉';
             nextBtn.disabled = true;
@@ -46,6 +61,9 @@ nextBtn.addEventListener('click', function () {
             nextBtn.style.opacity = "0.8";
             nextBtn.style.background = "linear-gradient(135deg, #2CC990 0%, #1E8F6B 100%)";
         }
+        */
+        localStorage.setItem('bigfive_answers', JSON.stringify(allAnswers))
+        window.location.href = 'results.html'
     }
 })
 
