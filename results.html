@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIVE DIMENSIONS | Tu Perfil</title>
+    <link rel="stylesheet" href="assets/CSS/index.css">
+    <link rel="stylesheet" href="assets/CSS/results.css">
+</head>
+
+<body>
+    <header>
+        <h1>FIVE DIMENSIONS</h1>
+        <p class="subheader">Tu perfil de personalidad</p>
+    </header>
+
+    <main>
+
+        <div class="results-hero">
+            <p class="results-hero-label">Perfil generado</p>
+            <div class="profile-label" id="profileLabel">Analizando...</div>
+            <p class="results-hero-description" id="profileDescription"></p>
+        </div>
+
+        <div class="dimensions-section">
+            <h3>Resultados por dimensión</h3>
+            <div id="dimensionsContainer"></div>
+        </div>
+
+        <div class="interpretation-section">
+            <h3>Interpretación de tu perfil</h3>
+            <div class="interp-grid">
+                <div class="interp-card">
+                    <h4>✅ Entornos donde puedes destacar</h4>
+                    <ul id="strengthsList"></ul>
+                </div>
+                <div class="interp-card">
+                    <h4>⚠️ Posibles riesgos</h4>
+                    <ul id="risksList"></ul>
+                </div>
+                <div class="interp-card">
+                    <h4>🔍 Se detecta</h4>
+                    <ul id="traitsList"></ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-final">
+            <h3>¿Quieres repetir el test?</h3>
+            <p style="margin: 0.5rem 0; font-size: 0.9rem; opacity: 0.9;">Vuelve a empezar para obtener un nuevo perfil.</p>
+            <button class="btn-primary"><a href="test.html">Repetir test</a></button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 || Done by Ganna Kuzmina & luisroh ♥</p>
+    </footer>
+
+    <script>
+        const DIMENSIONS = [
+            { key: 'socialEnergy',       name: 'Energía Social',        icon: '🌐' },
+            { key: 'emotionalStability', name: 'Estabilidad Emocional', icon: '💎' },
+            { key: 'mentalOrganization', name: 'Organización Mental',   icon: '🗂️' },
+            { key: 'cognitiveOpenness',  name: 'Apertura Cognitiva',    icon: '🔭' },
+            { key: 'socialCooperation',  name: 'Cooperación Social',    icon: '🤝' }
+        ]
+
+        function getLevel(score) {
+            if (score <= 20) return { text: 'Muy bajo',  cls: 'level-very-low' }
+            if (score <= 40) return { text: 'Bajo',      cls: 'level-low' }
+            if (score <= 60) return { text: 'Medio',     cls: 'level-medium' }
+            if (score <= 80) return { text: 'Alto',      cls: 'level-high' }
+            return              { text: 'Muy alto',  cls: 'level-very-high' }
+        }
+
+        function generateProfile(scores) {
+            const { socialEnergy, emotionalStability, mentalOrganization, cognitiveOpenness, socialCooperation } = scores
+
+            const highOrg    = mentalOrganization >= 61
+            const highOpen   = cognitiveOpenness  >= 61
+            const highCoop   = socialCooperation  >= 61
+            const highEnergy = socialEnergy        >= 61
+            const highStab   = emotionalStability  >= 61
+
+            if (highOrg && highOpen && highCoop) return {
+                label: 'Strategic Creative Collaborator',
+                description: 'Perfil altamente equilibrado entre creatividad, estructura y cooperación interpersonal.',
+                strengths: ['Producto digital', 'Equipos ágiles', 'Innovación', 'Diseño estratégico'],
+                risks: ['Frustración en entornos rígidos', 'Desgaste burocrático', 'Sobreexigencia personal'],
+                traits: ['Elevada organización mental', 'Pensamiento creativo avanzado', 'Alta orientación colaborativa']
+            }
+            if (highOrg && highOpen) return {
+                label: 'Creative Structured Thinker',
+                description: 'Combina disciplina organizativa con alta curiosidad intelectual.',
+                strengths: ['Tecnología', 'Producto digital', 'Startups', 'Entornos creativos estructurados'],
+                risks: ['Frustración en entornos muy rígidos', 'Saturación burocrática'],
+                traits: ['Alta curiosidad intelectual', 'Fuerte capacidad organizativa', 'Estilo analítico-creativo']
+            }
+            if (highEnergy && highCoop) return {
+                label: 'Social Connector',
+                description: 'Perfil altamente social con fuerte orientación hacia las personas y los equipos.',
+                strengths: ['Ventas', 'Recursos humanos', 'Coordinación de equipos', 'Atención al cliente'],
+                risks: ['Desgaste en entornos solitarios', 'Dificultad con tareas muy técnicas'],
+                traits: ['Alta sociabilidad', 'Orientación colaborativa', 'Fuerte empatía interpersonal']
+            }
+            if (highStab && highOrg) return {
+                label: 'Reliable Executor',
+                description: 'Perfil estable y disciplinado, orientado a la ejecución fiable y consistente.',
+                strengths: ['Gestión de proyectos', 'Operaciones', 'Finanzas', 'Entornos estructurados'],
+                risks: ['Resistencia al cambio', 'Dificultad con ambigüedad'],
+                traits: ['Alta estabilidad emocional', 'Disciplina constante', 'Perfil ejecutor fiable']
+            }
+            if (highOpen) return {
+                label: 'Curious Innovator',
+                description: 'Mente exploradora con alta orientación hacia lo nuevo y desconocido.',
+                strengths: ['Investigación', 'Innovación', 'Startups', 'Entornos creativos'],
+                risks: ['Dificultad para mantener constancia', 'Dispersión de foco'],
+                traits: ['Elevada curiosidad intelectual', 'Gusto por la exploración', 'Pensamiento divergente']
+            }
+            return {
+                label: 'Balanced Explorer',
+                description: 'Perfil equilibrado con capacidad de adaptación en múltiples contextos.',
+                strengths: ['Entornos variados', 'Roles polivalentes', 'Trabajo en equipo'],
+                risks: ['Puede necesitar mayor definición de rol'],
+                traits: ['Adaptabilidad', 'Perfil versátil', 'Equilibrio entre dimensiones']
+            }
+        }
+
+        function renderDimensions(scores) {
+            const container = document.getElementById('dimensionsContainer')
+            container.innerHTML = ''
+
+            DIMENSIONS.forEach(dim => {
+                const score = scores[dim.key]
+                const level = getLevel(score)
+                const row = document.createElement('div')
+                row.className = 'dimension-row'
+                row.innerHTML = `
+                    <div class="dimension-top">
+                        <div class="dimension-name">${dim.icon} ${dim.name}</div>
+                        <div class="dimension-score-label">
+                            <span class="dimension-score">${score}</span>
+                            <span class="level-badge ${level.cls}">${level.text}</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" data-width="${score}"></div>
+                    </div>
+                `
+                container.appendChild(row)
+            })
+
+            setTimeout(() => {
+                document.querySelectorAll('.progress-bar-fill').forEach(bar => {
+                    bar.style.width = bar.dataset.width + '%'
+                })
+            }, 100)
+        }
+
+        function renderInterpretation(profile) {
+            document.getElementById('profileLabel').textContent = profile.label
+            document.getElementById('profileDescription').textContent = profile.description
+
+            profile.strengths.forEach(s => {
+                const li = document.createElement('li')
+                li.innerHTML = `✅ ${s}`
+                document.getElementById('strengthsList').appendChild(li)
+            })
+            profile.risks.forEach(r => {
+                const li = document.createElement('li')
+                li.innerHTML = `⚠️ ${r}`
+                document.getElementById('risksList').appendChild(li)
+            })
+            profile.traits.forEach(t => {
+                const li = document.createElement('li')
+                li.innerHTML = `🔹 ${t}`
+                document.getElementById('traitsList').appendChild(li)
+            })
+        }
+
+// fijos solo por ahora, para hacerlo en #3
+        function init() {
+            const scores = {
+                socialEnergy: 0,
+                emotionalStability: 0,
+                mentalOrganization: 0,
+                cognitiveOpenness: 0,
+                socialCooperation: 0
+            }
+
+            const profile = generateProfile(scores)
+            renderInterpretation(profile)
+            renderDimensions(scores)
+        }
+
+        init()
+    </script>
+</body>
+
+</html>
